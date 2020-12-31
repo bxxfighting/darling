@@ -5,7 +5,10 @@ node('master') {
     // 参数
     // service_sign: 服务标识
     // env_sign: 环境标识
-    // version: 版本号，branch/tag/commit均可
+    // tag: 代码库Tag号
+    // branch: 代码库分支名
+    // tag和branch两个参数，只需要传一个即可，如果同时传则以tag为准，如果都不传则直接拉master
+    // 之所以弄成两个参数是想两种都支持，又不想在pipeline去判断到底传入的是什么
     // 其它参数均通过获取服务部署信息接口获取
 
     jenkinsfile_repo = "git@github.com:bxxfighting/darling.git"
@@ -14,6 +17,7 @@ node('master') {
     // 原本jenkins job在执行时，就是获取了这个库的代码，才构建的job
     // 这里之所以要重新拉取一次是因为jenkins搭建的形式不一样，使用的slave节点的方式也不一样
     // 为了能准备的使用load功能加载到脚本，所以统一采用重新拉取脚本库的方式
+	// 因此，所有使用load的操作，都需要在这一步下面才可以(原本初始化参数我是想放上面的@@)
     stage("拉取执行脚本") {
         dir("${WORKSPACE}") {
             checkout([
@@ -27,6 +31,10 @@ node('master') {
         }
     }
 	script_base_path = WORKSPACE + "/script/"
+
+	// 初始化参数
+	// 工作路径、代码路径、制品路径等
+    load script_base_path + "jenkinsfile/common/params.pipeline"
 
     // 设置构建名称
     // 此功能需要安装插件: Build Name and Description Setter

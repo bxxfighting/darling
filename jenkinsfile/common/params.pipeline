@@ -1,0 +1,20 @@
+stage('初始化通用参数') {
+    // 在生成制品或者使用ansible部署时，都统一采用version变量
+    version = "master"
+    if (tag != '') {
+        version = tag
+    } else if (branch != '') {
+        version = branch
+    }
+
+    // 因为多个服务共用一个job，所以需要把他们的实际使用目录进行划分
+    // 这里按环境标识加服务标识进行区分
+    DO_DIR = WORKSPACE + "/" + env_sign + "/" + service_sign
+
+    // 定义代码拉取路径，这里使用src加服务标识主要原因是，其它语言什么路径无所谓
+    // 但是go语言比较费劲，所以就按这种方式来定义
+    CODE_DIR = DO_DIR + "/src/" + service_sign
+
+    // 如果构建中有制品生成，则最后放到此目录下
+    OUTPUT_DIR = DO_DIR + "/output"
+}
