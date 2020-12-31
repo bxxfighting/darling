@@ -1,0 +1,13 @@
+- name: "拉取代码"
+  git:
+    repo: "{{ code }}"
+    dest: "{{ service_dir }}"
+    version: "{{ version }}"
+    accept_hostkey: yes
+    key_file: "{{ dest_private_key_path }}"
+    force: yes
+  register: result
+
+- name: "最新commit id"
+  debug:
+    msg: "{{ result.after }}"

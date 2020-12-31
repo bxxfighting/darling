@@ -1,0 +1,25 @@
+stage("获取服务信息") {
+    // 重试三次，防止超时等异常
+    retry(3) {
+        // 获取服务部署信息接口地址
+        url = ''
+        // 获取服务部署信息时，需要区分环境
+        body = [
+            'service_sign': "${service_sign}"
+            'env_sign': "${env_sign}"
+        ]
+        // 请求中具体参数，根据实际接口配置
+        resp = httpRequest acceptType: 'APPLICATION_JSON', \
+                       consoleLogResponseBody: true, \
+                       contentType: 'APPLICATION_JSON', \
+                       httpMode: 'POST', \
+                       requestBody: groovy.json.JsonOutput.toJson(body), \
+                       responseHandle: 'NONE', \
+                       url: url, \
+                       validResponseCodes: '200', \
+                       validResponseContent: '"code":0', \
+                       wrapAsMultipart: false
+		resp_data = new JsonSlurperClassic().parseText(resp.content)
+        serviceInfo = resp_data.data
+    }
+}

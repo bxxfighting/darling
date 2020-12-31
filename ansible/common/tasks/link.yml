@@ -1,0 +1,5 @@
+- name: "修改软链接指向"
+  file:
+    src: "{{ src_path }}"
+    dest: "{{ dest_path }}"
+    state: link

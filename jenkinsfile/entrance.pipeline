@@ -1,0 +1,29 @@
+#!groovy
+import groovy.json.JsonSlurperClassic
+
+node('master') {
+    // 参数
+    // service_sign: 服务标识
+    // env_sign: 环境标识
+    // version: 版本号，branch/tag/commit均可
+    // 其它参数均通过获取服务部署信息接口获取
+
+    jenkinsfile_repo = ""
+    repo_user_id = ""
+
+    stage("拉取执行脚本") {
+        dir("${WORKSPACE}") {
+            checkout([$class: 'GitSCM',
+                      branches: [[name: "*/master"]],
+                      doGenerateSubmoduleConfigurations: false,
+                      extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "script"]],
+                      submoduleCfg: [],
+                      userRemoteConfigs: [[credentialsId: ${repo_user_id},
+                                           url: ${jenkinsfile_repo}]]])
+        }
+    }
+	script_base_path = WORKSPACE + "/script/"
+
+    // 获取服务部署信息, 并赋值给serviceInfo变量
+    load script_base_path + "jenkinsfile/common/service.pipeline"
+}

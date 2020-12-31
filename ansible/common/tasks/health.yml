@@ -1,0 +1,9 @@
+- name: "健康检查"
+  when: health_checked == "true"
+  uri:
+    url: "http://127.0.0.1:{{service_port}}{{ health_url }}"
+    return_content: yes
+  register: response
+  until: response.status == 200
+  retries: 60
+  delay: 2

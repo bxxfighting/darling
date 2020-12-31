@@ -1,0 +1,16 @@
+- name: "删除压缩包"
+  shell:
+    cmd: rm {{ service_base_path }}/*.tar.gz*
+    warn: no
+  ignore_errors: True
+
+- name: "获取历史版本"
+  shell:
+    cmd: ls -rt {{ service_base_path }} | grep "{{ service }}-" | head -n -10
+  register: delete_files
+
+- name: "删除历史版本"
+  file:
+    path: "{{ service_base_path }}/{{ item }}"
+    state: absent
+  with_items: "{{ delete_files.stdout_lines }}"
