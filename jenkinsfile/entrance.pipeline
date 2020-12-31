@@ -28,6 +28,9 @@ node('master') {
     }
 	script_base_path = WORKSPACE + "/script/"
 
+    // 设置构建名称
+    load script_base_path + "jenkinsfile/common/buildname.pipeline"
+
     // 获取服务部署信息, 并赋值给serviceInfo变量
     load script_base_path + "jenkinsfile/common/service.pipeline"
 }

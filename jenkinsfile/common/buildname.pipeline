@@ -1,0 +1,4 @@
+stage('设置构建名称及描述') {
+    buildName "#${BUILD_NUMBER} - ${service_sign} - ${env_sign}"
+    buildDescription "${version}"
+}
