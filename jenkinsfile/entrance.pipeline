@@ -42,4 +42,21 @@ node('master') {
 
     // 获取服务部署信息, 并赋值给serviceInfo变量
     load script_base_path + "jenkinsfile/common/service.pipeline"
+
+    // 拉取代码
+    // 其实这步骤不一定放这里，因为如果是有些服务直接在服务上通过拉取代码部署的情况下
+    // 在jenkins上就不需要拉取代码的
+    // 比如，php服务部署可以通过直接拉取代码的方式部署，就不需要在jenkins上有这一步
+    // 但是java服务就需要先在jenkins上构建，就需要此步骤
+    // 还有可能一些web前端项目开发是直接在本地构建好后，把构建产物(dist)也上传到了代码库
+    // 这种情况也可以直接在服务上拉取代码部署(实际上不推荐这种，因为太依赖个人的环境了)
+    // 我就遇到过，他们说本地怎么可以构建成功啊，你的job怎么失败啊，我说你把你本地node_modules删除再构建试试
+    // 最后他删除了，再构建也通过不了了，这就引申出另一个问题，每次web前端构建前要不要把原来的删除
+    // 我是建议删除的，虽然会重新下载，影响速度，但是这样可以保证是一定没问题的，而且影响的速度也不多
+    load script_base_path + "jenkinsfile/common/code.pipeline"
+
+    // 因为不同语言构建方式不一样，所以这里根据语言来加载
+    if (serviceInfo.language == "go") {
+        load script_base_path + "jenkinsfile/go/go.pipeline"
+    }
 }
