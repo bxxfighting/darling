@@ -8,7 +8,7 @@ node('master') {
     // version: 版本号，branch/tag/commit均可
     // 其它参数均通过获取服务部署信息接口获取
 
-    jenkinsfile_repo = ""
+    jenkinsfile_repo = "git@github.com:bxxfighting/darling.git"
     repo_user_id = ""
 
     // 原本jenkins job在执行时，就是获取了这个库的代码，才构建的job
@@ -16,13 +16,14 @@ node('master') {
     // 为了能准备的使用load功能加载到脚本，所以统一采用重新拉取脚本库的方式
     stage("拉取执行脚本") {
         dir("${WORKSPACE}") {
-            checkout([$class: 'GitSCM',
-                      branches: [[name: "*/master"]],
-                      doGenerateSubmoduleConfigurations: false,
-                      extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "script"]],
-                      submoduleCfg: [],
-                      userRemoteConfigs: [[credentialsId: ${repo_user_id},
-                                           url: ${jenkinsfile_repo}]]])
+            checkout([
+                $class: 'GitSCM',
+                branches: [[name: "*/master"]],
+                doGenerateSubmoduleConfigurations: false,
+                extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "script"]],
+                submoduleCfg: [],
+                userRemoteConfigs: [[credentialsId: ${repo_user_id}, url: ${jenkinsfile_repo}]]
+             ])
         }
     }
 	script_base_path = WORKSPACE + "/script/"
