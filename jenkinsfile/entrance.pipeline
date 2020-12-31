@@ -11,6 +11,9 @@ node('master') {
     jenkinsfile_repo = ""
     repo_user_id = ""
 
+    // 原本jenkins job在执行时，就是获取了这个库的代码，才构建的job
+    // 这里之所以要重新拉取一次是因为jenkins搭建的形式不一样，使用的slave节点的方式也不一样
+    // 为了能准备的使用load功能加载到脚本，所以统一采用重新拉取脚本库的方式
     stage("拉取执行脚本") {
         dir("${WORKSPACE}") {
             checkout([$class: 'GitSCM',
