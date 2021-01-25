@@ -10,8 +10,8 @@ After=network.target
 [Service]
 User=www
 WorkingDirectory={{service_path}}
-ExecStart={{run_cmd}}
-ExecStop=/bin/kill -9 $MAINPID
+ExecStart={{start_cmd}}
+ExecStop={{stop_cmd}}
 Restart=always
 RestartSec=5
 PrivateTmp=true
@@ -23,11 +23,11 @@ WantedBy=multi-user.target
 > Service节下，User根据自己需求指定用户，一般用root或者www(必须保证系统存在对应用户)  
 > WorkingDirectory: 指定工作目录  
 > ExecStart: 指定启动命令  
+> ExecStop: 指定停止命令，可以给一个默认值: kill -9 $MAINPID
 > Restart=always：代表异常退出就重启  
 > RestartSec=5：重启前等待5秒  
 > PrivateTmp=true: 使用独立的tmp目录，如果设置为false就使用/tmp目录，如果为true就使用/tmp/xxxx/tmp目录  
 > java服务需要注意，如果设置为true的话，很多jvm相关命令就查找不到此服务了，比如jps命令  
-> ExecStop: 这里直接使用了```kill -9```来停止服务，如果有其它需求，其实可以设置成参数stop_cmd来配置不同命令  
 
 ### 有关操作
 以服务xx为例:  

@@ -5,8 +5,8 @@ After=network.target
 [Service]
 User=www
 WorkingDirectory={{service_path}}
-ExecStart={{run_cmd}}
-ExecStop=/bin/kill -9 $MAINPID
+ExecStart={{start_cmd}}
+ExecStop={{stop_cmd}}
 Restart=always
 RestartSec=5
 PrivateTmp=true
