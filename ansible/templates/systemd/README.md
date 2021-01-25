@@ -69,6 +69,14 @@ systemctl stop xx
 ```
 systemctl restart xx
 ```
+* 开机启动
+```
+systemctl enable xx
+```
+* 禁用开机启动
+```
+systemctl disable xx
+```
 * 查看服务运行输出日志
 ```
 journalctl -fn 100 -u xx
