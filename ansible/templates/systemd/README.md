@@ -29,6 +29,21 @@ WantedBy=multi-user.target
 > PrivateTmp=true: 使用独立的tmp目录，如果设置为false就使用/tmp目录，如果为true就使用/tmp/xxxx/tmp目录  
 > java服务需要注意，如果设置为true的话，很多jvm相关命令就查找不到此服务了，比如jps命令  
 
+此模板文件会在ansible-playbook中使用，通过ansible的template模板，生成对应的文件  
+在使用之前，需要在ansible-playbook中定义好所需变量，ansible会自动完成替换  
+示例:  
+```
+vars:
+  start_cmd: "python manager.py runserver"
+  service_sign: "xx"
+  service_path: "/var/www/xx"
+tasks:
+- name:
+  template:
+    src: ansible/templates/systemd/common/systemd.tpl
+    dest: /lib/systemd/system/xx.service
+```
+
 ### 有关操作
 以服务xx为例:  
 
