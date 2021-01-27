@@ -29,6 +29,9 @@ WantedBy=multi-user.target
 > PrivateTmp=true: 使用独立的tmp目录，如果设置为false就使用/tmp目录，如果为true就使用/tmp/xxxx/tmp目录  
 > java服务需要注意，如果设置为true的话，很多jvm相关命令就查找不到此服务了，比如jps命令  
 
+有很多时候会有此文件中添加一些环境变量的信息，但是我不建议这样操作  
+环境变量信息应该在系统对应配置文件中配置，这样方便统一管理  
+
 此模板文件会在ansible-playbook中使用，通过ansible的template模板，生成对应的文件  
 在使用之前，需要在ansible-playbook中定义好所需变量，ansible会自动完成替换  
 示例:  
