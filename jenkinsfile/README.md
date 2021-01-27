@@ -1,3 +1,6 @@
+### 说在前面
+[Jenkins安装及使用教程](https://my.oschina.net/bxxfighting/blog/3122435)  
+
 ### 有关Jenkins
 > 最初被调用搭建devops系统时，关于jenkins的知识几乎为0.  
 > 然后在网上查找各种文档真是像吃屎一样.  
