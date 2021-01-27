@@ -14,7 +14,7 @@ stage("获取服务信息") {
                        contentType: 'APPLICATION_JSON', \
                        httpMode: 'POST', \
                        requestBody: groovy.json.JsonOutput.toJson(body), \
-                       responseHandle: 'NONE', \
+                       responseHandle: 'STRING', \
                        url: url, \
                        validResponseCodes: '200', \
                        validResponseContent: '"code":0', \

@@ -3,9 +3,9 @@ stage("拉取服务代码") {
         dir("${DO_DIR}") {
             // 为了保证可以正确的拉到代码，因为进行如下操作
             checkout_version = "*/master"
-            if (tag != '') {
+            if (version_typ == 'tag') {
                 checkout_version = "refs/tags/" + tag
-            } else if (branch != '') {
+            } else if (version_typ == 'branch') {
                 checkout_version = "refs/heads/" + branch
             }
 

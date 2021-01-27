@@ -5,11 +5,8 @@ node('master') {
     // 参数
     // service_sign: 服务标识
     // env_sign: 环境标识
-    // tag: 代码库Tag号
-    // branch: 代码库分支名
-    // tag和branch两个参数，只需要传一个即可，如果同时传则以tag为准，如果都不传则直接拉master
-    // 之所以弄成两个参数是想两种都支持，又不想在pipeline去判断到底传入的是什么
-    // 其它参数均通过获取服务部署信息接口获取
+    // version_typ: tag/branch
+    // version: 版本号(对应tag号或者分支名)
 
     jenkinsfile_repo = "git@github.com:bxxfighting/darling.git"
     repo_user_id = ""

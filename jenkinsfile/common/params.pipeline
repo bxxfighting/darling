@@ -1,12 +1,4 @@
 stage('初始化通用参数') {
-    // 在生成制品或者使用ansible部署时，都统一采用version变量
-    version = "master"
-    if (tag != '') {
-        version = tag
-    } else if (branch != '') {
-        version = branch
-    }
-
     // 因为多个服务共用一个job，所以需要把他们的实际使用目录进行划分
     // 这里按环境标识加服务标识进行区分
     DO_DIR = WORKSPACE + "/" + env_sign + "/" + service_sign
