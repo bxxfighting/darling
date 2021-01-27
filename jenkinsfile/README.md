@@ -65,3 +65,10 @@ node('') {
 * Build Name and Description Setter
 > 因为多个服务使用同一个job，那么就需要区分哪一个任务部署的是哪一个服务  
 > 因此使用此插件完成修改build任务名称及描述信息  
+
+* HTTP Request
+> 用来发送http请求  
+
+* Pipeline Utility Steps
+> 用于支持读取json/yaml等格式数据，比如用HTTP Request请求返回数据，可以用readJSON来解析成变量  
+> 或者下载一个内容为yaml格式的文件，然后用readYaml来读取成变量  
