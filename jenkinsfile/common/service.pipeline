@@ -12,14 +12,14 @@ stage("获取服务信息") {
         resp = httpRequest acceptType: 'APPLICATION_JSON', \
                        consoleLogResponseBody: true, \
                        contentType: 'APPLICATION_JSON', \
-                       httpMode: 'POST', \
+                       httpMode: 'GET', \
                        requestBody: groovy.json.JsonOutput.toJson(body), \
-                       responseHandle: 'STRING', \
+                       responseHandle: 'NONE', \
                        url: url, \
                        validResponseCodes: '200', \
                        validResponseContent: '"code":0', \
                        wrapAsMultipart: false
-		resp_data = new JsonSlurperClassic().parseText(resp.content)
+        resp_data = readJSON text: resp.content
         serviceInfo = resp_data.data
     }
 }

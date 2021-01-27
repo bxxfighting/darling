@@ -1,5 +1,4 @@
 #!groovy
-import groovy.json.JsonSlurperClassic
 
 node('master') {
     // 参数
