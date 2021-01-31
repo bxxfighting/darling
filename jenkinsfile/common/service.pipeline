@@ -5,7 +5,7 @@ stage("获取服务信息") {
         url = ''
         // 获取服务部署信息时，需要区分环境
         body = [
-            'service_sign': "${service_sign}"
+            'service_sign': "${service_sign}",
             'env_sign': "${env_sign}"
         ]
         // 请求中具体参数，根据实际接口配置
