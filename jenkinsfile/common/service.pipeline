@@ -2,12 +2,9 @@ stage("获取服务信息") {
     // 重试三次，防止超时等异常
     retry(3) {
         // 获取服务部署信息接口地址
-        url = ''
+        base_url = "http://rurality.oldb.top/api/v1/business/service/deploy/config/"
         // 获取服务部署信息时，需要区分环境
-        body = [
-            'service_sign': "${service_sign}",
-            'env_sign': "${env_sign}"
-        ]
+        url = base_url + "?" + "service_sign=${service_sign}&environment_sign=${env_sign}"
         // 请求中具体参数，根据实际接口配置
         resp = httpRequest acceptType: 'APPLICATION_JSON', \
                        consoleLogResponseBody: true, \
