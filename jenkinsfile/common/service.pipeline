@@ -10,7 +10,6 @@ stage("获取服务信息") {
                        consoleLogResponseBody: true, \
                        contentType: 'APPLICATION_JSON', \
                        httpMode: 'GET', \
-                       requestBody: groovy.json.JsonOutput.toJson(body), \
                        responseHandle: 'NONE', \
                        url: url, \
                        validResponseCodes: '200', \
