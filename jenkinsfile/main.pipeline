@@ -21,7 +21,7 @@ node('master') {
                 doGenerateSubmoduleConfigurations: false,
                 extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "script"]],
                 submoduleCfg: [],
-                userRemoteConfigs: [[credentialsId: ${repo_user_id}, url: ${jenkinsfile_repo}]]
+                userRemoteConfigs: [[credentialsId: "${repo_user_id}", url: "${jenkinsfile_repo}"]]
              ])
         }
     }
