@@ -36,6 +36,7 @@ node('master') {
     load script_base_path + "jenkinsfile/common/buildname.pipeline"
 
     // 获取服务部署信息, 并赋值给serviceInfo变量
+    // 之后的步骤都可以通过serviceInfo.xx调用对应的服务参数
     load script_base_path + "jenkinsfile/common/service.pipeline"
 
     // 拉取代码
