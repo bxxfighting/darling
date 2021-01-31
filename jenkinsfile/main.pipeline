@@ -7,8 +7,8 @@ node('master') {
     // version_typ: tag/branch
     // version: 版本号(对应tag号或者分支名)
 
-    jenkinsfile_repo = "git@github.com:bxxfighting/darling.git"
-    repo_user_id = ""
+    jenkinsfile_repo = "git@gitlab.oldb.top:dacongming/darling.git"
+    repo_user_id = "devops"
 
     // 原本jenkins job在执行时，就是获取了这个库的代码，才构建的job
     // 这里之所以要重新拉取一次是因为jenkins搭建的形式不一样，使用的slave节点的方式也不一样
