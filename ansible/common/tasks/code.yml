@@ -14,7 +14,7 @@
     force: yes
   register: result
 
-- name: "最新commit id"
+- name: "commit id"
   debug:
     msg: "{{ result.after }}"
 
