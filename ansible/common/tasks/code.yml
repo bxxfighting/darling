@@ -1,6 +1,12 @@
+- name: "复制私钥"
+  copy:
+    src: "{{ src_private_key_path }}"
+    dest: "{{ dest_private_key_path }}"
+    mode: "0600"
+
 - name: "拉取代码"
   git:
-    repo: "{{ code }}"
+    repo: "{{ repo }}"
     dest: "{{ service_dir }}"
     version: "{{ version }}"
     accept_hostkey: yes
@@ -11,3 +17,8 @@
 - name: "最新commit id"
   debug:
     msg: "{{ result.after }}"
+
+- name: "删除私钥"
+  file:
+    path: "{{ dest_private_key_path }}"
+    state: absent
