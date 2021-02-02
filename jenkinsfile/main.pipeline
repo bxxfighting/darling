@@ -7,8 +7,8 @@ node('master') {
     // version_typ: tag/branch
     // version: 版本号(对应tag号或者分支名)
 
-    jenkinsfile_repo = "git@github.com:bxxfighting/darling.git"
-    repo_user_id = ""
+    jenkinsfile_repo = "git@gitlab.oldb.top:dacongming/darling.git"
+    repo_user_id = "devops"
 
     // 原本jenkins job在执行时，就是获取了这个库的代码，才构建的job
     // 这里之所以要重新拉取一次是因为jenkins搭建的形式不一样，使用的slave节点的方式也不一样
@@ -16,13 +16,12 @@ node('master') {
     // 因此，所有使用load的操作，都需要在这一步下面才可以(原本初始化参数我是想放上面的@@)
     stage("拉取执行脚本") {
         dir("${WORKSPACE}") {
-            checkout([
-                $class: 'GitSCM',
+            checkout([$class: 'GitSCM',
                 branches: [[name: "*/master"]],
                 doGenerateSubmoduleConfigurations: false,
                 extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "script"]],
                 submoduleCfg: [],
-                userRemoteConfigs: [[credentialsId: ${repo_user_id}, url: ${jenkinsfile_repo}]]
+                userRemoteConfigs: [[credentialsId: "${repo_user_id}", url: "${jenkinsfile_repo}"]]
              ])
         }
     }
