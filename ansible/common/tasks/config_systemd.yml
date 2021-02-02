@@ -1,0 +1,4 @@
+- name: "配置systemd"
+  template:
+    src: "{{ systemd_conf_tpl }}"
+    dest: "{{ dest_systemd_conf }}"

@@ -1,0 +1,6 @@
+- name: "停止服务"
+  systemd:
+    name: "{{ service }}"
+    daemon_reload: yes
+    enabled: yes
+    state: stopped
