@@ -1,0 +1,7 @@
+- name: "更改owner"
+  file:
+    path: "{{ service_dir }}"
+    state: directory
+    recurse: yes
+    owner: "{{ owner }}"
+    group: "{{ owner }}"
