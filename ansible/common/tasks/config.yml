@@ -1,0 +1,6 @@
+- name: "复制配置文件"
+  copy:
+    src: "{{ src_config_path }}"
+    dest: "{{ dest_config_path }}"
+    mode: "0644"
+    owner: root

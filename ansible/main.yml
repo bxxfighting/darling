@@ -1,0 +1,21 @@
+---
+- hosts: all
+  remote_user: root
+  max_fail_percentage: 0
+  serial: "{{ serial_count }}"
+  gather_facts: "{{ is_gather_facts }}"
+  vars:
+    service_sign: "{{ service_sign }}"
+
+  tasks:
+  - name: archive
+    include_tasks: archive.yml
+    tags: archive
+
+  - name: git
+    include_tasks: git.yml
+    tags: git
+
+  - name: docker
+    include_tasks: docker.yml
+    tags: docker

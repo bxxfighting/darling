@@ -1,0 +1,6 @@
+- include_tasks: ansible/common/tasks/config_systemd.yml
+- include_tasks: ansible/common/tasks/stop_service.yml
+- include_tasks: ansible/common/tasks/mkdir.yml
+- include_tasks: ansible/common/tasks/code.yml
+- include_tasks: ansible/common/tasks/start_service.yml
+- include_tasks: ansible/common/tasks/health.yml

@@ -1,0 +1,11 @@
+- name: publish
+  include_tasks: publish.yml
+  tags: publish
+
+- name: rollback
+  include_tasks: rollback.yml
+  tags: rollback
+
+- name: restart
+  include_tasks: restart.yml
+  tags: restart
