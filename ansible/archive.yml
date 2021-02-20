@@ -1,0 +1,11 @@
+- name: python
+  include_tasks: archive/python.yml
+  tags: python
+
+- name: php
+  include_tasks: archive/php.yml
+  tags: php
+
+- name: vue
+  include_tasks: archive/vue.yml
+  tags: vue

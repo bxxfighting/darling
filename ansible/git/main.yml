@@ -1,20 +1,3 @@
----
-- hosts: all
-  remote_user: root
-  gather_facts: false
-  vars:
-    service_sign: "{{ service_sign }}"
-    version: "{{ version }}"
-
-  tasks:
-  - name: python
-    include_tasks: python.yml
-    tags: python
-
-  - name: php
-    include_tasks: php.yml
-    tags: php
-
-  - name: vue
-    include_tasks: vue.yml
-    tags: vue
+- name: "{{ language }}"
+  include_tasks: "{{ language }}/main.yml"
+  tags: "{{ language }}"

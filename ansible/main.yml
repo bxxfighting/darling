@@ -8,14 +8,5 @@
     service_sign: "{{ service_sign }}"
 
   tasks:
-  - name: archive
-    include_tasks: archive.yml
-    tags: archive
-
-  - name: git
-    include_tasks: git.yml
-    tags: git
-
-  - name: docker
-    include_tasks: docker.yml
-    tags: docker
+  - name: "{{ artifact_typ }}"
+    include_tasks: "{{ artifact_typ }}/main.yml"

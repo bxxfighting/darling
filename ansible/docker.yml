@@ -1,0 +1,11 @@
+- name: python
+  include_tasks: docker/python.yml
+  tags: python
+
+- name: php
+  include_tasks: docker/php.yml
+  tags: php
+
+- name: vue
+  include_tasks: docker/vue.yml
+  tags: vue
