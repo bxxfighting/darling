@@ -46,3 +46,8 @@ module.exports = {
 ```
 
 [参考文档](https://pm2.keymetrics.io/docs/usage/cluster-mode/)  
+
+### 有关日志
+默认pm2会把日志文件放到~/.pm2/logs下, 如果需要指定自己想要的路径，则可以通过以下文档配置  
+
+[参考文档](https://pm2.keymetrics.io/docs/usage/log-management/)  
