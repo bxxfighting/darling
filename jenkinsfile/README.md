@@ -75,3 +75,35 @@ node('') {
 * Pipeline Utility Steps
 > 用于支持读取json/yaml等格式数据，比如用HTTP Request请求返回数据，可以用readJSON来解析成变量  
 > 或者下载一个内容为yaml格式的文件，然后用readYaml来读取成变量  
+
+
+示例代码:
+假如现在有一个POST请求，需要json参数id和version  
+返回状态码200是正常，并且返回内容中code需要为0, 否则失败  
+然后正常返回后，需要返回的json格式数据解析出来使用  
+```
+// body数据生成，其实可以直接body = ["id": 111, "version": "1.2.4"]
+// 这里只是提醒，如何弄一个空的字典，因为直接[]就是数组了，中间需要加冒号
+body = [:]
+body.put("id", 111)
+body.put("version", "1.2.4")
+
+url = 'http://xxx.com/xxx/'
+resp = httpRequest acceptType: 'APPLICATION_JSON', \
+            consoleLogResponseBody: true, \
+            contentType: 'APPLICATION_JSON', \
+            httpMode: 'POST', \
+			// 这里是将字典转成json字符串
+            requestBody: groovy.json.JsonOutput.toJson(body), \
+            responseHandle: 'NONE', \
+            url: url, \
+			// 验证返回的http状态码必须是200
+            validResponseCodes: '200', \
+			// 验证返回的内容中code必须为0
+            validResponseContent: '"code": 0', \
+            wrapAsMultipart: false
+// 通过readJSON解析json数据
+data = readJSON text: resp.content
+result = data.data
+code = data.code
+```
